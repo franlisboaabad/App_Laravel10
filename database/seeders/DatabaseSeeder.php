@@ -15,18 +15,16 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('secret'),
+        ]);
 
-        // User::firstOrCreate(
-        //     ['email' => 'admin@admin.com'],
-        //     [
-        //         'name' => 'Admin',
-        //         'password' => bcrypt('password'),
-        //     ]
-        // )->assignRole('admin');
+        $this->call(RolesSeeder::class);
+
+        User::where('email', 'admin@admin.com')->first()->assignRole('admin');
+
 
     }
 }
